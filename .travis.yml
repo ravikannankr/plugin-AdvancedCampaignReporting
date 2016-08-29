@@ -31,6 +31,7 @@ env:
     - PIWIK_ROOT_DIR=$TRAVIS_BUILD_DIR/piwik
     - UNPROTECTED_ARTIFACTS=1
     - PIWIK_LATEST_STABLE_TEST_TARGET=2.16.0
+    - DEPENDENT_PLUGINS="PiwikPRO/plugin-LicenseManager"
     - secure: "gI409KqKdq4XdXhtrYegEx9xqUu5BwMVFTUwplgqwBGYnD5QvHzuzOF0Bry8mqRb53k+m9ty/w8xXWjtSt4bEjsiO/kdzUkFaEcNBgrrSzAyFmtGv3pU8zUfzMsAVehbCk22+jHiDHFOVsAhI4V5oRcXxHuRuHPdi5XC8BvDo4E="
     - secure: "WT7KcHzZQlrOt/+h6ovhhp2rTE79uhSNN0mAiDfskRAMwnZCCCGzL9uFiUKTLNTtLF+uqdbH0maisMziJqp3bLnzWWkBkUTR5Rsx8BM7V6P6na+fpqxs4JIGJ/FCtlStl67oZxKkWVTaSQFLMWBIg8rJ4b4gCuVEXszD5XN30w0="
   matrix:
@@ -75,6 +76,10 @@ install:
   - '[ "$PLUGIN_NAME" == "" ] || [ ! -f ./tests/travis/check_plugin_compatible_with_piwik.php ] || php ./tests/travis/check_plugin_compatible_with_piwik.php "$PLUGIN_NAME"'
 
   - ./tests/travis/configure_git.sh
+
+  # manually adding LicenseManager tool to dependencies
+  - composer config repositories.1 vcs https://github.com/PiwikPRO/ent-LicenseManager.git
+  - composer require piwikpro/ent-LicenseManager:1.0.*
 
   # travis now complains about this failing 9 times out of 10, so removing it
   #- travis_retry composer self-update

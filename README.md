@@ -18,6 +18,10 @@ An example landing page URL is:
 /offer?pk_campaign=Best-Seller&pk_source=Newsletter_7&pk_medium=email
 ```
 
+## Requirements
+
+This plugin requires LicenseManager plugin to be installed and activated.
+
 ### Features
  * Real time Analytics Reports of all your Campaign Marketing
  * Detects Campaign parameters from the landing page URL, within the query string or in the #hash string

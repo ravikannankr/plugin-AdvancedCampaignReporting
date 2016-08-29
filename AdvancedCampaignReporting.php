@@ -10,9 +10,11 @@
 namespace Piwik\Plugins\AdvancedCampaignReporting;
 
 use Piwik\Common;
+use Piwik\Container\StaticContainer;
 use Piwik\Db;
 use Piwik\Piwik;
 use Piwik\Plugin\ViewDataTable;
+use Piwik\Plugins\LicenseManager\Components\PluginSupervisor\PluginSupervisorInterface;
 use Piwik\Url;
 use Piwik\View\ReportsByDimension;
 use Piwik\WidgetsList;
@@ -335,5 +337,22 @@ class AdvancedCampaignReporting extends \Piwik\Plugin
             Common::prefixTable("log_conversion"),
         );
         return $tables;
+    }
+
+    public function postLoad()
+    {
+        if (!StaticContainer::getContainer()->has('LicenseManager.plugin_supervisor')) {
+            throw new \Exception(
+                'This plugin requires LicenseManager plugin to be activated.'
+                . ' Run ./console plugin:activate LicenseManager to enable LicenseManager.'
+            );
+        }
+
+        /** @var PluginSupervisorInterface $pluginSupervisor */
+        $pluginSupervisor = StaticContainer::get('LicenseManager.plugin_supervisor');
+
+        if (!$pluginSupervisor->isPluginEnabled()) {
+            $pluginSupervisor->deactivatePlugin($this);
+        }
     }
 }

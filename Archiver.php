@@ -1,11 +1,9 @@
 <?php
 /**
- * Piwik PRO - cloud hosting and enterprise analytics consultancy
- * from the creators of Piwik.org
+ * Piwik PRO -  Premium functionality and enterprise-level support for Piwik Analytics
  *
  * @link http://piwik.pro
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- *
  */
 namespace Piwik\Plugins\AdvancedCampaignReporting;
 
@@ -126,7 +124,6 @@ class Archiver extends \Piwik\Plugin\Archiver
         $recordToDimensions = $this->getRecordToDimensions();
 
         while ($row = $query->fetch()) {
-            //var_dump($row);exit;
             foreach($recordToDimensions as $record => $dimensionsForRecord) {
                 $dataArray = $this->getDataArray($record);
 

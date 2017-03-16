@@ -1,11 +1,9 @@
 <?php
 /**
- * Piwik PRO - cloud hosting and enterprise analytics consultancy
- * from the creators of Piwik.org
+ * Piwik PRO -  Premium functionality and enterprise-level support for Piwik Analytics
  *
  * @link http://piwik.pro
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- *
  */
 
 namespace Piwik\Plugins\AdvancedCampaignReporting\tests\Integration;
@@ -13,6 +11,7 @@ namespace Piwik\Plugins\AdvancedCampaignReporting\tests\Integration;
 use Piwik\Common;
 use Piwik\Plugins\AdvancedCampaignReporting\Tracker;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Piwik\Tracker\Visit\VisitProperties;
 
 /**
  * @group AdvancedCampaignReporting
@@ -45,9 +44,13 @@ class TrackerTest extends IntegrationTestCase
     public function testUpdateNewVisitWithCampaign(array $visitorInfo, $requestUrl, array $expected)
     {
         $tracker = new Tracker($this->createRequestMock($requestUrl));
-        $tracker->updateNewVisitWithCampaign($visitorInfo);
 
-        $this->assertEquals($expected, $visitorInfo);
+        $visitProperties = new VisitProperties();
+        $visitProperties->setProperties($visitorInfo);
+
+        $tracker->updateNewVisitWithCampaign($visitProperties);
+
+        $this->assertEquals($expected, $visitProperties->getProperties());
     }
 
     public function getConversionData()

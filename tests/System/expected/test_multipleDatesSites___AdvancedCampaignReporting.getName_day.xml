@@ -3,6 +3,69 @@
 	<result idSite="1">
 		<result date="2013-01-22">
 			<row>
+				<label>ecommerce_campaign</label>
+				<nb_uniq_visitors>1</nb_uniq_visitors>
+				<nb_visits>2</nb_visits>
+				<nb_actions>2</nb_actions>
+				<nb_users>0</nb_users>
+				<max_actions>1</max_actions>
+				<sum_visit_length>1444</sum_visit_length>
+				<bounce_count>2</bounce_count>
+				<goals>
+					<row idgoal='ecommerceAbandonedCart'>
+						<nb_conversions>1</nb_conversions>
+						<nb_visits_converted>1</nb_visits_converted>
+						<revenue>555</revenue>
+						<items>5</items>
+					</row>
+					<row idgoal='ecommerceOrder'>
+						<nb_conversions>1</nb_conversions>
+						<nb_visits_converted>1</nb_visits_converted>
+						<revenue>555</revenue>
+						<revenue_subtotal>0</revenue_subtotal>
+						<revenue_tax>0</revenue_tax>
+						<revenue_shipping>0</revenue_shipping>
+						<revenue_discount>0</revenue_discount>
+						<items>5</items>
+					</row>
+				</goals>
+				<nb_conversions>1</nb_conversions>
+				<revenue>555</revenue>
+				<segment>referrerType==campaign;referrerName==ecommerce_campaign</segment>
+				<subtable>
+					<row>
+						<label>ecommerce_keyword</label>
+						<nb_uniq_visitors>1</nb_uniq_visitors>
+						<nb_visits>2</nb_visits>
+						<nb_actions>2</nb_actions>
+						<nb_users>0</nb_users>
+						<max_actions>1</max_actions>
+						<sum_visit_length>1444</sum_visit_length>
+						<bounce_count>2</bounce_count>
+						<goals>
+							<row idgoal='ecommerceAbandonedCart'>
+								<nb_conversions>1</nb_conversions>
+								<nb_visits_converted>1</nb_visits_converted>
+								<revenue>555</revenue>
+								<items>5</items>
+							</row>
+							<row idgoal='ecommerceOrder'>
+								<nb_conversions>1</nb_conversions>
+								<nb_visits_converted>1</nb_visits_converted>
+								<revenue>555</revenue>
+								<revenue_subtotal>0</revenue_subtotal>
+								<revenue_tax>0</revenue_tax>
+								<revenue_shipping>0</revenue_shipping>
+								<revenue_discount>0</revenue_discount>
+								<items>5</items>
+							</row>
+						</goals>
+						<nb_conversions>1</nb_conversions>
+						<revenue>555</revenue>
+					</row>
+				</subtable>
+			</row>
+			<row>
 				<label>campaignnamedimension - no other dimension for this visit</label>
 				<nb_uniq_visitors>1</nb_uniq_visitors>
 				<nb_visits>1</nb_visits>
@@ -86,69 +149,6 @@
 						<sum_visit_length>0</sum_visit_length>
 						<bounce_count>1</bounce_count>
 						<nb_visits_converted>0</nb_visits_converted>
-					</row>
-				</subtable>
-			</row>
-			<row>
-				<label>ecommerce_campaign</label>
-				<nb_uniq_visitors>1</nb_uniq_visitors>
-				<nb_visits>2</nb_visits>
-				<nb_actions>2</nb_actions>
-				<nb_users>0</nb_users>
-				<max_actions>1</max_actions>
-				<sum_visit_length>1444</sum_visit_length>
-				<bounce_count>2</bounce_count>
-				<goals>
-					<row idgoal='ecommerceAbandonedCart'>
-						<nb_conversions>1</nb_conversions>
-						<nb_visits_converted>1</nb_visits_converted>
-						<revenue>555</revenue>
-						<items>5</items>
-					</row>
-					<row idgoal='ecommerceOrder'>
-						<nb_conversions>1</nb_conversions>
-						<nb_visits_converted>1</nb_visits_converted>
-						<revenue>555</revenue>
-						<revenue_subtotal>0</revenue_subtotal>
-						<revenue_tax>0</revenue_tax>
-						<revenue_shipping>0</revenue_shipping>
-						<revenue_discount>0</revenue_discount>
-						<items>5</items>
-					</row>
-				</goals>
-				<nb_conversions>1</nb_conversions>
-				<revenue>555</revenue>
-				<segment>referrerType==campaign;referrerName==ecommerce_campaign</segment>
-				<subtable>
-					<row>
-						<label>ecommerce_keyword</label>
-						<nb_uniq_visitors>1</nb_uniq_visitors>
-						<nb_visits>2</nb_visits>
-						<nb_actions>2</nb_actions>
-						<nb_users>0</nb_users>
-						<max_actions>1</max_actions>
-						<sum_visit_length>1444</sum_visit_length>
-						<bounce_count>2</bounce_count>
-						<goals>
-							<row idgoal='ecommerceAbandonedCart'>
-								<nb_conversions>1</nb_conversions>
-								<nb_visits_converted>1</nb_visits_converted>
-								<revenue>555</revenue>
-								<items>5</items>
-							</row>
-							<row idgoal='ecommerceOrder'>
-								<nb_conversions>1</nb_conversions>
-								<nb_visits_converted>1</nb_visits_converted>
-								<revenue>555</revenue>
-								<revenue_subtotal>0</revenue_subtotal>
-								<revenue_tax>0</revenue_tax>
-								<revenue_shipping>0</revenue_shipping>
-								<revenue_discount>0</revenue_discount>
-								<items>5</items>
-							</row>
-						</goals>
-						<nb_conversions>1</nb_conversions>
-						<revenue>555</revenue>
 					</row>
 				</subtable>
 			</row>
@@ -270,6 +270,7 @@
 				</goals>
 				<nb_conversions>1</nb_conversions>
 				<revenue>555</revenue>
+				<segment>campaignName==ecommerce_campaign</segment>
 				<subtable>
 					<row>
 						<label>ecommerce_keyword - ecommerce_content</label>
@@ -313,6 +314,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==campaignnamedimension+-+no+other+dimension+for+this+visit</segment>
 			</row>
 			<row>
 				<label>campaign_hashed</label>
@@ -324,9 +326,10 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==campaign_hashed</segment>
 				<subtable>
 					<row>
-						<label>keyword from #hash tag parameter</label>
+						<label>keyword from #hash tag parameter - this_campaign_content_should_not_be_tracked</label>
 						<nb_uniq_visitors>1</nb_uniq_visitors>
 						<nb_visits>1</nb_visits>
 						<nb_actions>1</nb_actions>
@@ -361,6 +364,7 @@
 				</goals>
 				<nb_conversions>3</nb_conversions>
 				<revenue>4444</revenue>
+				<segment>campaignName==campaign_with_two_goals_conversions</segment>
 			</row>
 			<row>
 				<label>default_offer</label>
@@ -372,6 +376,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==default_offer</segment>
 				<subtable>
 					<row>
 						<label>not_an_advanced_campaign_at_first</label>
@@ -396,6 +401,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22name%22...lenghty+%22nam</segment>
 				<subtable>
 					<row>
 						<label>lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;keyword&quot;...lenghty &quot;k</label>
@@ -420,6 +426,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==november_offer</segment>
 				<subtable>
 					<row>
 						<label>mot_clé_pépère - contains personalized campaigns for client</label>
@@ -444,6 +451,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==october_offer</segment>
 				<subtable>
 					<row>
 						<label>mot_clé_pépère - none</label>
@@ -468,6 +476,7 @@
 				<sum_visit_length>0</sum_visit_length>
 				<bounce_count>1</bounce_count>
 				<nb_visits_converted>0</nb_visits_converted>
+				<segment>campaignName==should_be_new_visit</segment>
 			</row>
 		</result>
 		<result date="2013-01-24" />

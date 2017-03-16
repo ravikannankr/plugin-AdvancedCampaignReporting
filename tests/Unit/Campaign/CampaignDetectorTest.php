@@ -1,16 +1,20 @@
 <?php
 /**
- * Piwik PRO - cloud hosting and enterprise analytics consultancy
- * from the creators of Piwik.org
+ * Piwik PRO -  Premium functionality and enterprise-level support for Piwik Analytics
  *
  * @link http://piwik.pro
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
- *
  */
 
 namespace Piwik\Plugins\AdvancedCampaignReporting\tests\Unit\Campaign;
 
 use Piwik\Plugins\AdvancedCampaignReporting\Campaign\CampaignDetector;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignContent;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignId;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignKeyword;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignMedium;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignName;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignSource;
 use Piwik\Plugins\AdvancedCampaignReporting\Tracker;
 use Piwik\Tracker\Request;
 
@@ -125,12 +129,12 @@ class CampaignDetectorTest extends \PHPUnit_Framework_TestCase
     public function getCampaignParameters()
     {
         return [
-            Tracker::CAMPAIGN_NAME_FIELD    => ['pk_campaign', 'piwik_campaign', 'pk_cpn', 'utm_campaign'],
-            Tracker::CAMPAIGN_KEYWORD_FIELD => ['pk_keyword', 'piwik_kwd', 'pk_kwd', 'utm_term'],
-            Tracker::CAMPAIGN_SOURCE_FIELD  => ['pk_source', 'utm_source'],
-            Tracker::CAMPAIGN_MEDIUM_FIELD  => ['pk_medium', 'utm_medium'],
-            Tracker::CAMPAIGN_CONTENT_FIELD => ['pk_content', 'utm_content'],
-            Tracker::CAMPAIGN_ID_FIELD      => ['pk_cid', 'utm_id'],
+            CampaignName::COLUMN_NAME    => ['pk_campaign', 'piwik_campaign', 'pk_cpn', 'utm_campaign'],
+            CampaignKeyword::COLUMN_NAME => ['pk_keyword', 'piwik_kwd', 'pk_kwd', 'utm_term'],
+            CampaignSource::COLUMN_NAME  => ['pk_source', 'utm_source'],
+            CampaignMedium::COLUMN_NAME  => ['pk_medium', 'utm_medium'],
+            CampaignContent::COLUMN_NAME => ['pk_content', 'utm_content'],
+            CampaignId::COLUMN_NAME      => ['pk_cid', 'utm_id'],
         ];
     }
 

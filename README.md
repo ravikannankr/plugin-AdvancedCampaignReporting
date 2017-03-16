@@ -67,6 +67,13 @@ For example, by default parameter `campaign_name` track following parameters if 
  campaignName `cn`, campaignSource `cs`, campaignMedium `cm`, campaignContent `cc`, campaignId `ci`.
 
 ## Changelog
+
+__2.0.0__
+
+* Introduced compatibility with Piwik 3.0.0
+
+__ pre 2.0.0__
+
  * 1.4.0 [improvement] added possibility to configure custom campaign parameters names
  * 1.3.2 Bugfix
  * 1.3.1 Better support for campaign parameters behind hash tag (#)
@@ -83,6 +90,6 @@ For example, by default parameter `campaign_name` track following parameters if 
 
 ## Support
 
-Plugin provided by [Piwik PRO](https://piwik.pro) - Cloud and Enterprise analytics from the creators of Piwik.org
+Plugin provided by [Piwik PRO](https://piwik.pro) - Cloud and Enterprise analytics
 
 If you find a bug or have a suggestion please create an issue in: https://github.com/PiwikPRO/plugin-AdvancedCampaignReporting/issues

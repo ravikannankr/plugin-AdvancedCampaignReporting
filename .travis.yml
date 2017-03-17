@@ -22,8 +22,8 @@ env:
   - UNPROTECTED_ARTIFACTS=1
   - PIWIK_REPOSITORY_SLUG=PiwikPRO/piwik.git
   - PIWIK_LATEST_STABLE_TEST_TARGET=master
-  - secure: "fEnu9C+KbqECUB8IUxq5dSMV/XkrU1eusSfeG1tQC1Fow+hBjbDdlclonf2pwfh8CJtvhs1IMRdaAIwEyRHbny8SK+wrg+vzQXoY93UN0na3siTY91MdpgIlSKbNaLHxIXKptK8SWr5oGv2hQIlYD6WXhUZhsFSlSg12qK7W/rHn9G5e/q4Tk2kI1qEdvISHDZLYWkgQg3T0aXwGyL5IJu/r8GU1rB5fsQo2XB5sjAoafkLnuORAGGKrtEfGmideSQOmp++/a4DBS9kFTRrY7yNEgTW/bollz7bQ7ZSZkg5Phfym9bx1O+TFTriuMIOXZd+fo/fs16TEDEZgsrLOznAv7/E7Ej/WyhwT9zGD6CDnVCHEFzLbtUiToeBEDflfk8ydWYnPsSCyVOMmfX0HMPxAg4JKDdH0dOke9GuwrY0EN/SOvuIdihs/jZyDhsz2e1IaAOmvVoUd3L0Y+m7sI8NW+tsYh63MN0xDufzzxHn+i9fHplakSUKidhlC8hE/i8hYzOOfQmV4MnX5vrbSRokAGm+e5f7yz2eoeNRUYH9YKGgo8spC7Y75MXxXJZqm2KWv71SB5D30KcvHmIbPjTmoj/ITM5Jk/bhJh4WLAYRZceZjNJL7Bjlq07ajlvHOHB6m00zGQ6UpS7U9uxteMkP1tVO8Rrj8BNJsfSjH1/0="
-  - secure: "yoSGUVYP9zOx42ZfwizIyzJPwnp6UczS9vmufje85SF5HL5ojHWqWUnhWly1Ml8oSCDO9/QhkHGiwjrnYHhlYmPKWTOVn6mcLWUcR81ogPCdPVK5EogOHslWV4H1ZyksnxktZr9/hbf79dNdcpiWv+vwQsQgoElkFpaTOIzC5FRmqj4eoKqdjA5eEupcbxynYO43eKn9GRHZPZJUL3lUUmiW0QUus8HASAfGwQRnhVHxZ115ei67FEM3v/cVy3iyGYNI+Y/mK7OhtQc93CvgEgWaU0HYhdstvnWeNPYdHz4ohNfP3dj3WQYuWuixbeM9douoJEQ64871rW4vEdL304nTArLgJXCaLBOiK45K1Hw7JrsEIlEx7JnR1LxMJ/HOKLgdow/jvEVjgIX0bX+dWMNV8oRSxCS+DWZeztjtjgAHHtZqlRRngEt6wajU2BJZhUcEDI4DbXlCm+e9LmhTGP2oN4P7dNvvo/w0kl2/njGQhTZ5o/xt2s//aR1JpuFodx/qCBaljfeGIZWaNchzgcw/+GEUqingtFyGVDkDoe2RY3fJgyaYUrdWCMACcOwT+1JsNJnpaEH+wDiv6Sn8656CBEykJ/pVn8g9GfD3pMBawP4e3W32QFd9mK9ZLB80oATbF8CAENEqcgcZdHrjvdjoWrtCRT0PT0FyOvoEKi4="
+  - secure: nlCs/W7dxJ4XnUdcQsBMbf5OXrN0FYsGREeRaGCBFF0fMWaF4TP1gnsBy6om3Owj0z7FZjyr+HszA/iXTrc2Da6zKq+l0Rm5oQBzMI2Q+ihqnmeKIiY/1dNcVE93Zn1a7A+j87RYufXjE3t4UvP7AtkaM0KSEbfTMx+eYKvv7Zg=
+  - secure: SixbZBsnKv7QElaucBkzt8USsHx1M6mVawlMmFuCayuwmg9XLNeITtFKXPfn0otJ8Ecf/H9z0N6tD52/n3LkjMp4W/aH/sPLKhqzYJnyOHB3164C/H0CSxmeCV/GvRltaEZcRBbJeoElZOkGof4zQi+msV2cWu5BO92VOqx/VjU=
   matrix:
   - TEST_SUITE=PluginTests MYSQL_ADAPTER=PDO_MYSQL TEST_AGAINST_PIWIK_BRANCH=3.x-pro
   - TEST_SUITE=UITests MYSQL_ADAPTER=PDO_MYSQL TEST_AGAINST_PIWIK_BRANCH=3.x-pro
@@ -47,10 +47,12 @@ install:
 - cd piwik
 - git fetch -q --all
 - git submodule update
-- '[ -d ./tests/travis/.git ] || sh -c "rm -rf ./tests/travis && git clone https://$GITHUB_USER_TOKEN:@github.com/PiwikPRO/travis-scripts.git ./tests/travis"'
+- '[ -d ./tests/travis/.git ] || sh -c "rm -rf ./tests/travis && git clone https://$GITHUB_USER_TOKEN:@github.com/PiwikPRO/travis-scripts.git
+  ./tests/travis"'
 - cd ./tests/travis ; git checkout master ; cd ../..
 - "./tests/travis/checkout_test_against_branch.sh"
-- '[ "$PLUGIN_NAME" == "" ] || [ ! -f ./tests/travis/check_plugin_compatible_with_piwik.php ] || php ./tests/travis/check_plugin_compatible_with_piwik.php "$PLUGIN_NAME"'
+- '[ "$PLUGIN_NAME" == "" ] || [ ! -f ./tests/travis/check_plugin_compatible_with_piwik.php
+  ] || php ./tests/travis/check_plugin_compatible_with_piwik.php "$PLUGIN_NAME"'
 - "./tests/travis/configure_git.sh"
 - '[ "$SKIP_COMPOSER_INSTALL" == "1" ] || travis_retry composer install'
 - rm -rf plugins/$PLUGIN_NAME

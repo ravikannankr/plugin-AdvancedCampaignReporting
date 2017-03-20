@@ -72,7 +72,7 @@ __2.0.0__
 
 * Introduced compatibility with Piwik 3.0.0
 
-__ pre 2.0.0__
+__pre 2.0.0__
 
  * 1.4.0 [improvement] added possibility to configure custom campaign parameters names
  * 1.3.2 Bugfix

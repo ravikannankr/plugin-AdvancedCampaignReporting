@@ -1,14 +1,21 @@
 <?php
 /**
- * Piwik PRO -  Premium functionality and enterprise-level support for Piwik Analytics
+ * Copyright (C) Piwik PRO - All rights reserved.
+ *
+ * Using this code requires that you first get a license from Piwik PRO.
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
  *
  * @link http://piwik.pro
- * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
 namespace Piwik\Plugins\AdvancedCampaignReporting\tests\Integration;
 
-use Piwik\Plugins\AdvancedCampaignReporting\Tracker;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignContent;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignId;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignKeyword;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignMedium;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignName;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignSource;
 use Piwik\Plugins\SitesManager\API as SitesManager;
 use Piwik\Plugins\AdvancedCampaignReporting\API as AdvancedCampaignReportingAPI;
 use Piwik\Tests\Framework\Fixture;
@@ -34,12 +41,12 @@ class CustomDimensionConfigTest extends IntegrationTestCase
         $testVars = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
         $configOverride = $testVars->configOverride;
         $configOverride['AdvancedCampaignReporting'] = [
-            Tracker::CAMPAIGN_NAME_FIELD => 'pk_campaign,custom_name_parameter',
-            Tracker::CAMPAIGN_KEYWORD_FIELD => 'pk_keyword,custom_keyword_parameter',
-            Tracker::CAMPAIGN_SOURCE_FIELD => 'pk_source,custom_source_parameter',
-            Tracker::CAMPAIGN_MEDIUM_FIELD => 'pk_medium,custom_medium_parameter',
-            Tracker::CAMPAIGN_CONTENT_FIELD => 'pk_content ,custom_content_parameter',
-            Tracker::CAMPAIGN_ID_FIELD => 'pk_id, custom_id_parameter'
+            CampaignName::COLUMN_NAME => 'pk_campaign,custom_name_parameter',
+            CampaignKeyword::COLUMN_NAME => 'pk_campaign,custom_keyword_parameter',
+            CampaignSource::COLUMN_NAME => 'pk_campaign,custom_source_parameter',
+            CampaignMedium::COLUMN_NAME => 'pk_campaign,custom_medium_parameter',
+            CampaignContent::COLUMN_NAME => 'pk_campaign,custom_content_parameter',
+            CampaignId::COLUMN_NAME => 'pk_campaign,custom_id_parameter'
         ];
         $testVars->configOverride = $configOverride;
         $testVars->save();
@@ -49,11 +56,11 @@ class CustomDimensionConfigTest extends IntegrationTestCase
 
     public function testTrackingWithCustomParameters()
     {
-        $this->givenWebsite('TestWebsite');
+        $this->givenWebsite();
 
-        $this->givenUrl('http://example.com/?custom_name_parameter=%s&custom_keyword_parameter=%s&custom_source_parameter=%s&custom_content_parameter=%s&custom_medium_parameter=%s&custom_id_parameter=%s');
+        $this->givenTracker();
 
-        $this->givenTrackerConfiguration();
+        $this->givenUrl();
 
         $this->whenWebsiteTracksUrlWithCustomCampaignParameters();
 
@@ -155,17 +162,16 @@ class CustomDimensionConfigTest extends IntegrationTestCase
         Fixture::checkResponse($this->tracker->doTrackPageView('Track visit with custom campaign parameters'));
     }
 
-    private function givenWebsite($name)
+    private function givenWebsite()
     {
         $sitesManager = SitesManager::getInstance();
 
         $this->idSite = $sitesManager->addSite(
-            $name,
-            'http://example.com'
+            'TestSite'
         );
     }
 
-    private function givenTrackerConfiguration()
+    private function givenTracker()
     {
         $this->testDate = new \DateTime();
 
@@ -177,16 +183,32 @@ class CustomDimensionConfigTest extends IntegrationTestCase
         );
     }
 
-    private function givenUrl($url)
+    private function givenUrl()
     {
         $this->testUrl = sprintf(
-            $url,
+            'http://example.com/?custom_name_parameter=%s&custom_keyword_parameter=%s&custom_source_parameter=%s&custom_content_parameter=%s&custom_medium_parameter=%s&custom_id_parameter=%s',
             'custom_name_value',
             'custom_keyword_value',
             'custom_source_value',
             'custom_content_value',
             'custom_medium_value',
             'custom_id_value'
+        );
+    }
+
+    public function provideContainerConfig()
+    {
+        return array(
+
+            'observers.global' => \DI\add(array(
+                array('Environment.bootstrapped', function () {
+                    $config = \Piwik\Config::getInstance();
+
+
+
+                }),
+            )),
+
         );
     }
 }

@@ -46,45 +46,44 @@ class TrackSeveralCampaignsTest extends SystemTestCase
         $dateWithPluginEnabled = self::$fixture->dateTimeWithPluginEnabled;
 
         $apiToTest[] = array('API.get',
-                             array('idSite'  => self::$fixture->idSite,
-                                   'date'    => $dateWithPluginEnabled,
-                                   'periods' => array('day'),
-                             ));
+            array('idSite'  => self::$fixture->idSite,
+                'date'    => $dateWithPluginEnabled,
+                'periods' => array('day'),
+            ));
 
         $api = array(
-                    'Referrers.getCampaigns',
-                    'AdvancedCampaignReporting'
+            'AdvancedCampaignReporting'
         );
         $apiToTest[] = array($api,
-                             array('idSite'                 => self::$fixture->idSite,
-                                   'date'                   => $dateWithPluginEnabled,
-                                   'periods'                => array('day'),
-                                   'testSuffix'             => 'expanded',
-                                   'otherRequestParameters' => array('expanded' => 1)
-                             ));
+            array('idSite'                 => self::$fixture->idSite,
+                'date'                   => $dateWithPluginEnabled,
+                'periods'                => array('day'),
+                'testSuffix'             => 'expanded',
+                'otherRequestParameters' => array('expanded' => 1)
+            ));
         $apiToTest[] = array($api,
-                             array('idSite'                 => self::$fixture->idSite,
-                                   'date'                   => $dateWithPluginEnabled,
-                                   'periods'                => array('day'),
-                                   'testSuffix'             => 'flat',
-                                   'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
-                             ));
+            array('idSite'                 => self::$fixture->idSite,
+                'date'                   => $dateWithPluginEnabled,
+                'periods'                => array('day'),
+                'testSuffix'             => 'flat',
+                'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
+            ));
         $apiToTest[] = array($api,
-                             array('idSite'                 => self::$fixture->idSite,
-                                   'date'                   => $dateWithPluginEnabled,
-                                   'periods'                => array('day'),
-                                   'testSuffix'             => 'segmentedMatchAll',
-                                   'segment'                => 'campaignName!=test;campaignKeyword!=test;campaignSource!=test;campaignMedium!=test;campaignContent!=test;campaignId!=test',
-                                   'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
-                             ));
+            array('idSite'                 => self::$fixture->idSite,
+                'date'                   => $dateWithPluginEnabled,
+                'periods'                => array('day'),
+                'testSuffix'             => 'segmentedMatchAll',
+                'segment'                => 'campaignName!=test;campaignKeyword!=test;campaignSource!=test;campaignMedium!=test;campaignContent!=test;campaignId!=test',
+                'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
+            ));
         $apiToTest[] = array($api,
-                             array('idSite'                 => self::$fixture->idSite,
-                                   'date'                   => $dateWithPluginEnabled,
-                                   'periods'                => array('day'),
-                                   'testSuffix'             => 'segmentedMatchNone',
-                                   'segment'                => 'campaignName==test,campaignKeyword==test,campaignSource==test,campaignMedium==test,campaignContent==test,campaignId==test',
-                                   'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
-                             ));
+            array('idSite'                 => self::$fixture->idSite,
+                'date'                   => $dateWithPluginEnabled,
+                'periods'                => array('day'),
+                'testSuffix'             => 'segmentedMatchNone',
+                'segment'                => 'campaignName==test,campaignKeyword==test,campaignSource==test,campaignMedium==test,campaignContent==test,campaignId==test',
+                'otherRequestParameters' => array('flat' => 1, 'expanded' => 0)
+            ));
 
         $apiToTest[] = array('AdvancedCampaignReporting', array(
             'idSite' => 'all',
@@ -127,5 +126,4 @@ class TrackSeveralCampaignsTest extends SystemTestCase
     }
 
 }
-
 TrackSeveralCampaignsTest::$fixture = new TrackAdvancedCampaigns();

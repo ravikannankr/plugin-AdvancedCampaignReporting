@@ -22,10 +22,10 @@ use Piwik\Plugins\Referrers\API as ReferrersAPI;
  */
 class API extends \Piwik\Plugin\API
 {
-    protected function getDataTable($name, $idSite, $period, $date, $segment, $expanded = false, $idSubtable = null)
+    protected function getDataTable($name, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable = null)
     {
         Piwik::checkUserHasViewAccess($idSite);
-        $dataTable = Archive::getDataTableFromArchive($name, $idSite, $period, $date, $segment, $expanded, $idSubtable);
+        $dataTable = Archive::createDataTableFromArchive($name, $idSite, $period, $date, $segment, $expanded, $flat, $idSubtable);
         $dataTable->filter('Sort', array(Metrics::INDEX_NB_VISITS));
         $dataTable->queueFilter('ReplaceColumnNames');
         $dataTable->queueFilter('ReplaceSummaryRowLabel');
@@ -35,6 +35,7 @@ class API extends \Piwik\Plugin\API
     public function getName($idSite, $period, $date, $segment = false, $expanded = false)
     {
         $dataTable = $this->getDataTable(Archiver::CAMPAIGN_NAME_RECORD_NAME, $idSite, $period, $date, $segment, $expanded);
+        $dataTable->filter('AddSegmentValue');
 
         if ($this->isTableEmpty($dataTable)) {
             $referrersDataTable = ReferrersAPI::getInstance()->getCampaigns($idSite, $period, $date, $segment, $expanded);
@@ -46,7 +47,7 @@ class API extends \Piwik\Plugin\API
 
     public function getKeywordContentFromNameId($idSite, $period, $date, $idSubtable, $segment = false)
     {
-        $dataTable = $this->getDataTable(Archiver::CAMPAIGN_NAME_RECORD_NAME, $idSite, $period, $date, $segment, $expanded = false, $idSubtable);
+        $dataTable = $this->getDataTable(Archiver::CAMPAIGN_NAME_RECORD_NAME, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable);
 
         if ($this->isTableEmpty($dataTable)) {
             $referrersDataTable = ReferrersAPI::getInstance()->getKeywordsFromCampaignId($idSite, $period, $date, $idSubtable, $segment);
@@ -74,12 +75,14 @@ class API extends \Piwik\Plugin\API
     public function getSource($idSite, $period, $date, $segment = false)
     {
         $dataTable = $this->getDataTable(Archiver::CAMPAIGN_SOURCE_RECORD_NAME, $idSite, $period, $date, $segment);
+        $dataTable->filter('AddSegmentValue');
         return $dataTable;
     }
 
     public function getMedium($idSite, $period, $date, $segment = false)
     {
         $dataTable = $this->getDataTable(Archiver::CAMPAIGN_MEDIUM_RECORD_NAME, $idSite, $period, $date, $segment);
+        $dataTable->filter('AddSegmentValue');
         return $dataTable;
     }
 
@@ -97,7 +100,7 @@ class API extends \Piwik\Plugin\API
 
     public function getNameFromSourceMediumId($idSite, $period, $date, $idSubtable, $segment = false)
     {
-        $dataTable = $this->getDataTable(Archiver::HIERARCHICAL_SOURCE_MEDIUM_RECORD_NAME, $idSite, $period, $date, $segment, $expanded = false, $idSubtable);
+        $dataTable = $this->getDataTable(Archiver::HIERARCHICAL_SOURCE_MEDIUM_RECORD_NAME, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable);
         return $dataTable;
     }
 
@@ -137,5 +140,4 @@ class API extends \Piwik\Plugin\API
             throw new \Exception("Sanity check: unknown datatable type '" . get_class($dataTable) . "'.");
         }
     }
-
 }

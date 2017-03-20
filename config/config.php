@@ -1,46 +1,51 @@
 <?php
 
 use Interop\Container\ContainerInterface;
-use Piwik\Plugins\AdvancedCampaignReporting\Tracker;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignName;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignKeyword;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignSource;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignMedium;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignContent;
+use Piwik\Plugins\AdvancedCampaignReporting\Columns\CampaignId;
 
 return [
     'advanced_campaign_reporting.campaign_detector' => DI\object(
         '\Piwik\Plugins\AdvancedCampaignReporting\Campaign\CampaignDetector'
     ),
     'advanced_campaign_reporting.uri_parameters.campaign_name' => DI\factory(function (ContainerInterface $c) {
-        return [ Tracker::CAMPAIGN_NAME_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_name') ?
+        return [ CampaignName::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_name') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_name'))) :
-            Tracker::CAMPAIGN_NAME_FIELD_DEFAULT_URL_PARAMS
+            CampaignName::DEFAULT_URI_PARAMETERS
         ];
     }),
     'advanced_campaign_reporting.uri_parameters.campaign_keyword' => DI\factory(function (ContainerInterface $c) {
-        return [Tracker::CAMPAIGN_KEYWORD_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_keyword') ?
+        return [CampaignKeyword::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_keyword') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_keyword'))) :
-            Tracker::CAMPAIGN_KEYWORD_FIELD_DEFAULT_URL_PARAMS
+            CampaignKeyword::DEFAULT_URI_PARAMETERS
         ];
     }),
     'advanced_campaign_reporting.uri_parameters.campaign_source' => DI\factory(function (ContainerInterface $c) {
-        return [ Tracker::CAMPAIGN_SOURCE_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_source') ?
+        return [ CampaignSource::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_source') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_source'))) :
-            Tracker::CAMPAIGN_SOURCE_FIELD_DEFAULT_URL_PARAMS
+            CampaignSource::DEFAULT_URI_PARAMETERS
         ];
     }),
     'advanced_campaign_reporting.uri_parameters.campaign_medium' => DI\factory(function (ContainerInterface $c) {
-        return [ Tracker::CAMPAIGN_MEDIUM_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_medium') ?
+        return [ CampaignMedium::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_medium') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_medium'))) :
-            Tracker::CAMPAIGN_MEDIUM_FIELD_DEFAULT_URL_PARAMS
+            CampaignMedium::DEFAULT_URI_PARAMETERS
         ];
     }),
     'advanced_campaign_reporting.uri_parameters.campaign_content' => DI\factory(function (ContainerInterface $c) {
-        return [ Tracker::CAMPAIGN_CONTENT_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_content') ?
+        return [ CampaignContent::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_content') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_content'))) :
-            Tracker::CAMPAIGN_CONTENT_FIELD_DEFAULT_URL_PARAMS
+            CampaignContent::DEFAULT_URI_PARAMETERS
         ];
     }),
     'advanced_campaign_reporting.uri_parameters.campaign_id' => DI\factory(function (ContainerInterface $c) {
-        return [ Tracker::CAMPAIGN_ID_FIELD => $c->has('ini.AdvancedCampaignReporting.campaign_id') ?
+        return [ CampaignId::COLUMN_NAME => $c->has('ini.AdvancedCampaignReporting.campaign_id') ?
             array_map('trim', explode(',', $c->get('ini.AdvancedCampaignReporting.campaign_id'))) :
-            Tracker::CAMPAIGN_ID_FIELD_DEFAULT_URL_PARAMS
+            CampaignId::DEFAULT_URI_PARAMETERS
         ];
     }),
 ];
